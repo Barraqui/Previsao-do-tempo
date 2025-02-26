@@ -1,0 +1,118 @@
+/* @import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: hsla(160, 100%, 37%, 1);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  }
+} */
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1c44;
+}
+
+.search-city {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  margin-left: 15px;
+  
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.input-container input {
+  border: none;
+  outline: none;
+  padding: 5px;
+}
+
+.search svg {
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+.city-container {
+ margin: 0px; 
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  margin-left: 15px;
+  height: 25px ;
+}
+
+.city svg {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.temp-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: white;
+  height: 25px;
+}
+
+.select-temp {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
