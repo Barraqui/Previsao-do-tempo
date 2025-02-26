@@ -32,7 +32,6 @@ function searcBtn() {
   const cityName = input.value.trim();
   showWeatherData(cityName);
 };
-
 </script>
 
 <template>
