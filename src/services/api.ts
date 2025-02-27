@@ -6,3 +6,7 @@ export  async function getWeatherData(city: string) {
     
     return (await fetch(apiWeatherURL)).json();
 }
+
+export async function timeCity(city:string) {
+    
+}

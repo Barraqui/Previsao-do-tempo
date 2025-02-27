@@ -14,7 +14,12 @@ const data = reactive({
   temperatura: 0,
   descricao: "",
   icone: "",
-  senTermica: 0
+  senTermica: 0,
+  temperaturaMax: 0,
+  temperaturaMin: 0,
+  vento: 0,
+  umidade: 0,
+  pressao: 0
 });
 
 
@@ -28,6 +33,13 @@ const showWeatherData = async (city: string) => {
   data.descricao = infoCidade.weather[0].description;
   data.icone = (`http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`);
   data.senTermica = parseInt(infoCidade.main.feels_like);
+  data.temperaturaMax = parseInt(infoCidade.main.temp_max);
+  data.temperaturaMin = parseInt(infoCidade.main.temp_min);
+  data.vento = parseInt(infoCidade.wind.speed);
+  data.umidade = parseInt(infoCidade.main.humidity);
+  data.pressao = parseInt(infoCidade.main.pressure);
+
+
 };
 
 
