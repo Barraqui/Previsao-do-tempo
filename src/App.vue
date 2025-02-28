@@ -60,10 +60,10 @@ function searcBtn() {
             placeholder="Pesquisar por local"
             v-model="input"
           />
-          <button @click="searcBtn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
         </div>
+        <button @click="searcBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
       <div class="city-container">
         <div class="city">

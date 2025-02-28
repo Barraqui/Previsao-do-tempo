@@ -1,16 +1,24 @@
 body {
-    background-color: rgb(0, 0, 0);
-    color: white;
+    background-color: black;
+    color: var(--cor)
 }
 
 .container {
+    padding: 50px;
+    width: 40%;
+
+}
+
+.container-info {
+    box-shadow: 1px 0px 5px;
+    border-radius: 5px;
+}
+.container-climate {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 40%;
+    width: 100%;
     cursor: pointer;
-    background-color: rebeccapurple;
+    background-color: #24245a;
 }
 
 .time-climate {

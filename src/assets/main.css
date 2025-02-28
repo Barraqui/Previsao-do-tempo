@@ -33,6 +33,9 @@ a,
     padding: 0 2rem;
   }
 } */
+:root { 
+  --cor: #f1f1f1;
+}
 
 *{
   margin: 0px;
@@ -73,11 +76,20 @@ header {
   border: none;
   outline: none;
   padding: 5px;
+  width: 100%;
+  border-radius: 5px;
 }
 
-.search svg {
-  margin-left: 8px;
+.search button {
+  height: 30px;
+  width: 30px;
   cursor: pointer;
+  background-color: #1c1c44;
+  border: none;
+}
+
+.search button i {
+  color: var(--cor);
 }
 
 .city-container {
@@ -90,10 +102,10 @@ header {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 5px 10px;
-  color: white;
   cursor: pointer;
   margin-left: 15px;
   height: 25px ;
+  color: var(--cor);
 }
 
 .city i {
@@ -107,7 +119,7 @@ header {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 5px 10px;
-  color: white;
+  color: var(--cor);
   height: 25px;
 }
 
