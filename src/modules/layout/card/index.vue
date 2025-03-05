@@ -15,11 +15,11 @@ const props = defineProps<Props>();
                 <div class="container-climate">
                     <div class="time-climate">
                         <div class="climate">
-                            <h1>{{ props.types.cidade ?? 'Cidade' }}</h1>
+                            <h1>{{ props.types.cidade }}</h1>
                             <h2>Clima atual</h2>
                         </div>
                         <div class="time-day">
-                            <h2>{{ props.types.time ?? '00:00' }}</h2>
+                            <h2>{{ props.types.horas }}</h2>
                         </div>
                     </div>
                     <div class="container-temp-info">
@@ -39,7 +39,7 @@ const props = defineProps<Props>();
                             </div>
                         </div>
                         <div class="info-climate">
-                            <p>{{ props.types.descricao ?? "descrição" }}</p>
+                            <p>{{ props.types.descricao }}</p>
                             <div class="thermal-sensation">
                                 <p>sensação térmica</p>
                                 <div class="sensation-temp-number">
@@ -100,7 +100,31 @@ const props = defineProps<Props>();
             </div>
         </div>
         <div class="container-day">
-            <h1>oi</h1>
+            <div class="card-temp-day">
+                <div class="day">
+                    <span>4</span>
+                    <span>Ontem</span>
+                </div>
+                <div class="container-weather-day">
+                    <div class="weather-day">
+                        <img
+                            v-if="props.types.icone"
+                            :src="props.types.icone"
+                            :alt="props.types.descricao"
+                        />
+                        <span>35&deg;</span>
+                    </div>
+                    <div class="weather-day">
+                        <img
+                            v-if="props.types.icone"
+                            :src="props.types.icone"
+                            :alt="props.types.descricao"
+                        />
+                        <span>35&deg;</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </body>
 </template>

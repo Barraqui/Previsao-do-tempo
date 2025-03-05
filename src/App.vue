@@ -12,7 +12,7 @@ const data = reactive({
 
   cidade: "Cidade",
   temperatura: 0,
-  descricao: "",
+  descricao: "Descrição",
   icone: "",
   senTermica: 0,
   temperaturaMax: 0,
@@ -21,12 +21,14 @@ const data = reactive({
   umidade: 0,
   pressao: 0,
   urlMap: "",
+  horas: "00:00"
 });
 
 
 const showWeatherData = async (city: string) => {
 
   const infoCidade = await getWeatherData(city);
+  const timestamp = Math.floor(Date.now() / 1000);
   console.log(infoCidade);
 
   data.cidade = infoCidade.name;
@@ -40,6 +42,7 @@ const showWeatherData = async (city: string) => {
   data.umidade = parseInt(infoCidade.main.humidity);
   data.pressao = parseInt(infoCidade.main.pressure);
   data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${infoCidade.name}`
+  data.horas = `https://maps.googleapis.com/maps/api/timezone/json?location=${infoCidade.coord.lat},${infoCidade.coord.lon}&timestamp=${timestamp}&key=${timestamp}`
 
 };
 
