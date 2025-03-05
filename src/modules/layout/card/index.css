@@ -83,22 +83,18 @@ body {
     margin-left: 15px;
 }
 
-.container_more_infos {
-    border: 1px solid #ccc;
-}
-
-.more_infos {
+.more-infos {
     display: flex;
     justify-content: space-between;
     margin: 10px;
 }
 
-.legen_info {
+.legen-info {
     display: flex;
     align-items: center;
 }
 
-.legen_info i {
+.legen-info i {
     margin-right: 15px;
     height: 20px;
 }
@@ -115,7 +111,7 @@ body {
     border-radius: 5px;
 }
 
-.more-info-day {
+.container-day {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -2,22 +2,8 @@
 import { reactive, ref } from "vue";
 import "./index.css"
 import type { Props } from "@/services/types";
-import { getMapWeather } from "@/services/api";
 
 const props = defineProps<Props>();
-// const cidadeName = props.types.cidade
-// const apikeymaps = import.meta.env.VITE_APIKEYMAPS;
-// const urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${cidadeName}`
-
-// const showMap = async (city: string) => {
-
-//     const infoCidade = await getMapWeather(city);
-//     console.log(infoCidade);
-
-//     const urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${infoCidade.name}`
-
-
-// };
 
 </script>
 
@@ -64,40 +50,40 @@ const props = defineProps<Props>();
                     </div>
                 </div>
                 <div class="container-climate">
-                    <div class="more_infos">
-                        <div class="legen_info">
+                    <div class="more-infos">
+                        <div class="legen-info">
                             <i class="fa-solid fa-temperature-arrow-up"></i>
-                            <div class="title_info">
+                            <div class="title-info">
                                 <span>Temperatura max</span>
-                                <div class="temp_valor">{{ props.types.temperaturaMax }} &deg;C</div>
+                                <div class="temp-valor">{{ props.types.temperaturaMax }} &deg;C</div>
                             </div>
                         </div>
-                        <div class="legen_info">
+                        <div class="legen-info">
                             <i class="fa-solid fa-temperature-arrow-down"></i>
-                            <div class="title_info">
+                            <div class="title-info">
                                 <span>Temperatura min</span>
-                                <div class="temp_valor">{{ props.types.temperaturaMin }} &deg;C</div>
+                                <div class="temp-valor">{{ props.types.temperaturaMin }} &deg;C</div>
                             </div>
                         </div>
-                        <div class="legen_info">
+                        <div class="legen-info">
                             <i class="fa-solid fa-wind"></i>
-                            <div class="title_info">
+                            <div class="title-info">
                                 <span>Vento</span>
-                                <div class="temp_valor">{{ props.types.vento }} Km/h</div>
+                                <div class="temp-valor">{{ props.types.vento }} Km/h</div>
                             </div>
                         </div>
-                        <div class="legen_info">
+                        <div class="legen-info">
                             <i class="fa-solid fa-droplet"></i>
-                            <div class="title_info">
+                            <div class="title-info">
                                 <span>Umidade</span>
-                                <div class="temp_valor">{{ props.types.umidade }} %</div>
+                                <div class="temp-valor">{{ props.types.umidade }} %</div>
                             </div>
                         </div>
-                        <div class="legen_info">
+                        <div class="legen-info">
                             <i class="fa-solid fa-cloud-arrow-down"></i>
-                            <div class="title_info">
+                            <div class="title-info">
                                 <span>Pressão</span>
-                                <div class="temp_valor">{{ props.types.pressao }} mb</div>
+                                <div class="temp-valor">{{ props.types.pressao }} mb</div>
                             </div>
                         </div>
                     </div>
@@ -113,7 +99,7 @@ const props = defineProps<Props>();
                 </iframe>
             </div>
         </div>
-        <div class="more-infos-day">
+        <div class="container-day">
             <h1>oi</h1>
         </div>
     </body>
