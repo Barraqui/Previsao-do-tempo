@@ -10,5 +10,6 @@ export interface Props {
         vento?: number
         umidade?: number
         pressao?: number
+        urlMap?: string
     }
 }

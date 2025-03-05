@@ -6,7 +6,7 @@ import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
 import '@/assets/main.css';
 
-
+const apikeymaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
 const data = reactive({
 
@@ -19,7 +19,8 @@ const data = reactive({
   temperaturaMin: 0,
   vento: 0,
   umidade: 0,
-  pressao: 0
+  pressao: 0,
+  urlMap: "",
 });
 
 
@@ -38,10 +39,9 @@ const showWeatherData = async (city: string) => {
   data.vento = parseInt(infoCidade.wind.speed);
   data.umidade = parseInt(infoCidade.main.humidity);
   data.pressao = parseInt(infoCidade.main.pressure);
-
+  data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${infoCidade.name}`
 
 };
-
 
 function searcBtn() {
 

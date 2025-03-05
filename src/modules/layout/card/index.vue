@@ -2,8 +2,22 @@
 import { reactive, ref } from "vue";
 import "./index.css"
 import type { Props } from "@/services/types";
+import { getMapWeather } from "@/services/api";
 
 const props = defineProps<Props>();
+// const cidadeName = props.types.cidade
+// const apikeymaps = import.meta.env.VITE_APIKEYMAPS;
+// const urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${cidadeName}`
+
+// const showMap = async (city: string) => {
+
+//     const infoCidade = await getMapWeather(city);
+//     console.log(infoCidade);
+
+//     const urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${infoCidade.name}`
+
+
+// };
 
 </script>
 
@@ -12,7 +26,6 @@ const props = defineProps<Props>();
     <body>
         <div class="container">
             <div class="container-info">
-
                 <div class="container-climate">
                     <div class="time-climate">
                         <div class="climate">
@@ -20,7 +33,7 @@ const props = defineProps<Props>();
                             <h2>Clima atual</h2>
                         </div>
                         <div class="time-day">
-                            <h2>{{ props.types.horas ?? '00:00' }}</h2>
+                            <h2>{{ props.types.time ?? '00:00' }}</h2>
                         </div>
                     </div>
                     <div class="container-temp-info">
@@ -90,6 +103,18 @@ const props = defineProps<Props>();
                     </div>
                 </div>
             </div>
+            <div class="container-map">
+                <iframe
+                    loading="lazy"
+                    allowfullscreen
+                    referrerpolicy="no-referrer-when-downgrade"
+                    :src="props.types.urlMap"
+                >
+                </iframe>
+            </div>
+        </div>
+        <div class="more-infos-day">
+            <h1>oi</h1>
         </div>
     </body>
 </template>

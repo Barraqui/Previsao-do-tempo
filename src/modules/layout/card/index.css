@@ -1,24 +1,31 @@
+:root {
+    --containerBackground: rgba(255, 255, 255, 0.05);
+}
+
 body {
-    background-color: black;
+    background-color: #24245a;;
     color: var(--cor)
 }
 
 .container {
+    display: flex;
+    justify-content: space-between;
     padding: 50px;
-    width: 40%;
-
 }
 
 .container-info {
     box-shadow: 1px 0px 5px;
     border-radius: 5px;
+    width: 45%;
+    height: 100%;
 }
 .container-climate {
     display: flex;
     flex-direction: column;
     width: 100%;
     cursor: pointer;
-    background-color: #24245a;
+    background-color: var(--containerBackground);
+    
 }
 
 .time-climate {
@@ -26,7 +33,7 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    margin: 10px;
+    padding: 10px;
 }
 
 .climate {
@@ -94,4 +101,22 @@ body {
 .legen_info i {
     margin-right: 15px;
     height: 20px;
+}
+
+.container-map {
+    background-color: var(--containerBackground);
+    width: 50%;
+}
+
+.container-map iframe {
+    box-shadow: 1px 0px 5px;
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+}
+
+.more-info-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
