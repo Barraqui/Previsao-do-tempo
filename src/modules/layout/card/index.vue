@@ -1,9 +1,29 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import "./index.css"
 import type { Props } from "@/services/types";
+// import moment from "moment-timezone";
 
 const props = defineProps<Props>();
+// const dataAtual = new Date();
+// const obterDiasSemana = computed(() => {
+//     const diasDaSemana = [
+//         "Dom.",
+//         "Seg.",
+//         "Ter.",
+//         "Qua.",
+//         "Qui.",
+//         "Sex.",
+//         "Sáb."
+//     ];
+//     return diasDaSemana[dataAtual.getDay()];
+// });
+
+// const obterDia = computed(() => {
+//     return dataAtual.getDate();
+// })
+
+// const dataTeste = moment.tz("America/Sarandi").format("DD-MM-YY HH:mm");
 
 </script>
 
@@ -15,11 +35,11 @@ const props = defineProps<Props>();
                 <div class="container-climate">
                     <div class="time-climate">
                         <div class="climate">
-                            <h1>{{ props.types.cidade }}</h1>
+                            <h1>{{ props.types.cidade }}, {{ props.types.pais }}</h1>
                             <h2>Clima atual</h2>
                         </div>
                         <div class="time-day">
-                            <h2>{{ props.types.horas }}</h2>
+                            <h2>Horário da previsão: {{ props.types.horas }}</h2>
                         </div>
                     </div>
                     <div class="container-temp-info">
@@ -101,9 +121,10 @@ const props = defineProps<Props>();
         </div>
         <div class="container-day">
             <div class="card-temp-day">
+
                 <div class="day">
                     <span>4</span>
-                    <span>Ontem</span>
+                    <span>qui</span>
                 </div>
                 <div class="container-weather-day">
                     <div class="weather-day">

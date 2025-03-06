@@ -5,8 +5,9 @@ import { reactive, ref } from 'vue';
 import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
 import '@/assets/main.css';
+const apiKeyTimeZone = import.meta.env.VITE_APIKEYTIMEZONE
 
-const apikeymaps = import.meta.env.VITE_APIKEYMAPS;
+const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
 const data = reactive({
 
@@ -21,15 +22,18 @@ const data = reactive({
   umidade: 0,
   pressao: 0,
   urlMap: "",
-  horas: "00:00"
+  horas: "00:00",
+  pais: "País"
 });
-
 
 const showWeatherData = async (city: string) => {
 
   const infoCidade = await getWeatherData(city);
-  const timestamp = Math.floor(Date.now() / 1000);
   console.log(infoCidade);
+
+  const calculandoHoras = (infoCidade.dt + infoCidade.timezone + 10800) * 1000;
+  const resultadoDataHoras = new Date(calculandoHoras)
+  const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);
@@ -41,13 +45,12 @@ const showWeatherData = async (city: string) => {
   data.vento = parseInt(infoCidade.wind.speed);
   data.umidade = parseInt(infoCidade.main.humidity);
   data.pressao = parseInt(infoCidade.main.pressure);
-  data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apikeymaps}&q=${infoCidade.name}`
-  data.horas = `https://maps.googleapis.com/maps/api/timezone/json?location=${infoCidade.coord.lat},${infoCidade.coord.lon}&timestamp=${timestamp}&key=${timestamp}`
-
+  data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`
+  data.pais = infoCidade.sys.country;
+  data.horas = horasString;
 };
 
 function searcBtn() {
-
   const cityName = input.value.trim();
   showWeatherData(cityName);
 };
