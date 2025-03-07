@@ -1,15 +1,14 @@
 <script setup lang="ts">
 
 import { RouterLink, RouterView } from 'vue-router';
-import { reactive, ref } from 'vue';
+import { reactive, ref, type Reactive } from 'vue';
 import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
-import '@/assets/main.css';
-const apiKeyTimeZone = import.meta.env.VITE_APIKEYTIMEZONE
+import type { TiposDados, WeatherResponse } from './services/types';
 
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
-const data = reactive({
+const data: Reactive<WeatherResponse> = reactive({
 
   cidade: "Cidade",
   temperatura: 0,
@@ -26,7 +25,7 @@ const data = reactive({
   pais: "País"
 });
 
-const showWeatherData = async (city: string) => {
+const showWeatherData = async (city: Reactive<TiposDados>) => {
 
   const infoCidade = await getWeatherData(city);
   console.log(infoCidade);
@@ -34,21 +33,24 @@ const showWeatherData = async (city: string) => {
   const calculandoHoras = (infoCidade.dt + infoCidade.timezone + 10800) * 1000;
   const resultadoDataHoras = new Date(calculandoHoras)
   const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+  console.log(resultadoDataHoras)
 
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);
   data.descricao = infoCidade.weather[0].description;
-  data.icone = (`http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`);
+  data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`;
   data.senTermica = parseInt(infoCidade.main.feels_like);
   data.temperaturaMax = parseInt(infoCidade.main.temp_max);
   data.temperaturaMin = parseInt(infoCidade.main.temp_min);
   data.vento = parseInt(infoCidade.wind.speed);
   data.umidade = parseInt(infoCidade.main.humidity);
   data.pressao = parseInt(infoCidade.main.pressure);
-  data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`
+  data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`;
   data.pais = infoCidade.sys.country;
   data.horas = horasString;
+
 };
+
 
 function searcBtn() {
   const cityName = input.value.trim();
@@ -89,7 +91,96 @@ function searcBtn() {
   </header>
   <div>
 
-    <Card :types="data" />
+    <Card :data="data" />
   </div>
 
 </template>
+
+<style>
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1c1c44;
+}
+
+.search-city {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.search {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  padding-left: 130px;
+
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.input-container input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.search button {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  background-color: #1c1c44;
+  border: none;
+}
+
+.search button i {
+  color: var(--cor);
+}
+
+.city-container {
+  margin: 0px;
+}
+
+.city {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-left: 15px;
+  height: 25px;
+  color: var(--cor);
+}
+
+.city i {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.temp-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  color: var(--cor);
+  height: 25px;
+}
+
+.select-temp {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+</style>

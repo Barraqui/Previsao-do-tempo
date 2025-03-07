@@ -1,9 +1,37 @@
-export interface Props {
-    types: {
+
+export interface WeatherResponse {
+    name: string
+    dt: number
+    timezone: number
+    main: {
+        temp: string
+        feels_like: string
+        temp_max: string
+        temp_min: string
+        humidity: string
+        pressure: string
+    }
+
+    weather: {
+        description: string
+        icon: string
+    }
+    
+    wind: {
+        speed: string
+    }
+
+    sys: {
+        country: string
+    }
+}
+
+
+export interface TiposDados {
         cidade?: string
         temperatura?: number
         descricao?: string
-        icone?: object
+        icone?: string
         senTermica?: number
         temperaturaMax?: number
         temperaturaMin?: number
@@ -13,5 +41,4 @@ export interface Props {
         urlMap?: string
         horas?: string
         pais?: string
-    }
 }
