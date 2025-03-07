@@ -1,15 +1,19 @@
 <script setup lang="ts">
-
+/*
+ Criar uma pagina inicial para colocar a cidade que deseja e logo depois ela puxa os dados
+ Criar as infos aleatorias de temperatura, onde vai puxar os icones dependendo da temperatura
+ Arrumar alguns styles, como fonte, a distancia das divs, cores da pagina
+*/
 import { RouterLink, RouterView } from 'vue-router';
 import { reactive, ref, type Reactive } from 'vue';
 import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
-import type { TiposDados, WeatherResponse } from './services/types';
+import type { TiposDados } from './services/types';
 
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
-const data: Reactive<WeatherResponse> = reactive({
 
+const data: Reactive<TiposDados> = reactive({
   cidade: "Cidade",
   temperatura: 0,
   descricao: "Descrição",
@@ -25,7 +29,7 @@ const data: Reactive<WeatherResponse> = reactive({
   pais: "País"
 });
 
-const showWeatherData = async (city: Reactive<TiposDados>) => {
+const showWeatherData = async (city: string) => {
 
   const infoCidade = await getWeatherData(city);
   console.log(infoCidade);
