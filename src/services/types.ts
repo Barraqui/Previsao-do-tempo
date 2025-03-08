@@ -12,10 +12,7 @@ export interface WeatherResponse {
         pressure: string
     }
 
-    weather: {
-        description: string
-        icon: string
-    }
+    weather: Array <{description: string, icon: string}>
     
     wind: {
         speed: string
