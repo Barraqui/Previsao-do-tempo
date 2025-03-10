@@ -1,30 +1,37 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import { getWeatherData } from "@/services/api";
 import type { TiposDados, WeatherResponse } from "@/services/types";
 
 const props = defineProps<Props>();
-// const dataAtual = new Date();
-// const obterDiasSemana = computed(() => {
-//     const diasDaSemana = [
-//         "Dom.",
-//         "Seg.",
-//         "Ter.",
-//         "Qua.",
-//         "Qui.",
-//         "Sex.",
-//         "Sáb."
-//     ];
-//     return diasDaSemana[dataAtual.getDay()];
-// });
 
-// const obterDia = computed(() => {
-//     return dataAtual.getDate();
-// })
-type Props = {
-    data: TiposDados
+//gerar numeros aleatorios para 7 cards, os numeros vao ter que ser aleatorios com base na temperatura. Entao ela vai ser o limite maximo ou o limite vai ser a temperatura +5 (coisaAssim)
+const temperatura = ref(props.data.temperatura);
+const temperaturasDias = ref<{ max: number; min: number }[]>([]);
+
+const gerarTemperaturasDias = () => {
+    const quantidadeDias = 7;
+    const temperaturas: { max: number; min: number }[] = [];
+
+    for (let i = 0; i < quantidadeDias; i++) {
+        const variacao = temperatura.value * 0.05;
+        const maxTemperatura = Math.floor(Math.random() * (variacao * 2)) + (temperatura.value + 1);
+        const minTemperatura = Math.floor(maxTemperatura - (temperatura.value * 0.34));
+        temperaturas.push({ max: maxTemperatura, min: minTemperatura });
+    }
+    return temperaturas;
 }
 
+console.log(props.data.horas)
+watch(() => props.data.temperatura, (newTemperatura) => {
+    temperatura.value = newTemperatura;
+    temperaturasDias.value = gerarTemperaturasDias();
+})
+console.log(temperaturasDias.value)
+
+type Props = {
+    data: TiposDados
+};
 </script>
 
 <template>
@@ -120,11 +127,15 @@ type Props = {
             </div>
         </div>
         <div class="container-day">
-            <div class="card-temp-day">
+            <div
+                v-for="(temperatura, index) in temperaturasDias"
+                :key="index"
+                class="card-temp-day"
+            >
 
                 <div class="day">
+                    <span>{{ 10 }}</span>
                     <span>{{ }}</span>
-                    <span>qui</span>
                 </div>
                 <div class="container-weather-day">
                     <div class="weather-day">
@@ -133,7 +144,7 @@ type Props = {
                             :src="data.icone"
                             :alt="data.descricao"
                         />
-                        <span>{{ data.temperatura ? data.temperatura - 10 : '' }}&deg;</span>
+                        <span>{{ temperatura.max }}&deg;</span>
                     </div>
                     <div class="weather-day">
                         <img
@@ -141,7 +152,7 @@ type Props = {
                             :src="data.icone"
                             :alt="data.descricao"
                         />
-                        <span>35&deg;</span>
+                        <span>{{ temperatura.min }}&deg;</span>
                     </div>
                 </div>
             </div>

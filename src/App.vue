@@ -35,9 +35,13 @@ const showWeatherData = async (city: string) => {
   console.log(infoCidade);
 
   const calculandoHoras = (infoCidade.dt + infoCidade.timezone + 10800) * 1000;
-  const resultadoDataHoras = new Date(calculandoHoras)
+  const resultadoDataHoras = new Date(calculandoHoras);
   const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   console.log(resultadoDataHoras)
+
+  const diaSemanaAtual = resultadoDataHoras.getDay();
+  const diaMesAtual = resultadoDataHoras.getDate();
+  console.log(diaSemanaAtual, diaMesAtual)
 
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);

@@ -121,9 +121,8 @@ body {
 }
 
 .container-day {
-    /* display: flex;
+    display: flex;
     justify-content: space-between;
-    align-items: center; */
     padding: 50px;
     margin-left: 80px;
     margin-right: 80px;
