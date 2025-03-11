@@ -1,7 +1,6 @@
 <script setup lang="ts">
 /*
  Criar uma pagina inicial para colocar a cidade que deseja e logo depois ela puxa os dados
- Criar as infos aleatorias de temperatura, onde vai puxar os icones dependendo da temperatura
  Arrumar alguns styles, como fonte, a distancia das divs, cores da pagina
 */
 import { RouterLink, RouterView } from 'vue-router';
@@ -29,7 +28,8 @@ const data = reactive<TiposDados>({
   pais: "País",
   resultadoDiaAtual: 0,
   resultadoSemanaAtual: 0,
-  iconCards: []
+  iconCardsDia: [],
+  iconCardsNoite: []
 });
 
 const showWeatherData = async (city: string) => {
@@ -46,7 +46,7 @@ const showWeatherData = async (city: string) => {
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);
   data.descricao = infoCidade.weather[0].description;
-  data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`; //`http://openweathermap.org/img/wn/50n.png`;
+  data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`;
   data.senTermica = parseInt(infoCidade.main.feels_like);
   data.temperaturaMax = parseInt(infoCidade.main.temp_max);
   data.temperaturaMin = parseInt(infoCidade.main.temp_min);
@@ -56,23 +56,18 @@ const showWeatherData = async (city: string) => {
   data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`;
   data.pais = infoCidade.sys.country;
   data.horas = horasString;
-  data.iconCards = [];
+  data.iconCardsNoite = [];
 
   const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d"];
   const iconNoite = ["01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n"];
 
-  console.log(resultadoDataHoras.getHours());
   for (let i = 0; i < 7; i++) {
     const randomIconeDia = iconDia[Math.floor(Math.random() * iconDia.length)];
     const randomIconeNoite = iconNoite[Math.floor(Math.random() * iconNoite.length)];
 
-    data.iconCards.push({
-      day: `http://openweathermap.org/img/wn/${randomIconeDia}.png`,
-      night: `http://openweathermap.org/img/wn/${randomIconeNoite}.png`
-    })
+    data.iconCardsDia?.push(`http://openweathermap.org/img/wn/${randomIconeDia}.png`);
+    data.iconCardsNoite.push(`http://openweathermap.org/img/wn/${randomIconeNoite}.png`);
   };
-
-  // {id: 701, main: 'Mist', description: 'névoa', icon: '50n'}
 };
 
 

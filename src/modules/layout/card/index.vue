@@ -148,16 +148,16 @@ type Props = {
                 <div class="container-weather-day">
                     <div class="weather-day">
                         <img
-                            v-if="data.iconCards"
-                            :src="data.iconCards"
-                            :alt="data.descricao"
+                            v-if="data.iconCardsDia && data.iconCardsDia[index]"
+                            :src="data.iconCardsDia[index]"
+                            :alt="'Noite ' + temperatura.semana"
                         />
                         <span>{{ temperatura.max }}&deg;</span>
                     </div>
                     <div class="weather-day">
                         <img
-                            v-if="data.iconCards"
-                            :src="data.iconCards"
+                            v-if="data.iconCardsNoite && data.iconCardsNoite[index]"
+                            :src="data.iconCardsNoite[index]"
                             :alt="data.descricao"
                         />
                         <span>{{ temperatura.min }}&deg;</span>
