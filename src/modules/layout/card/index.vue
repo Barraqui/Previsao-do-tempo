@@ -5,21 +5,29 @@ import type { TiposDados, WeatherResponse } from "@/services/types";
 
 const props = defineProps<Props>();
 
-//gerar numeros aleatorios para 7 cards, os numeros vao ter que ser aleatorios com base na temperatura. Entao ela vai ser o limite maximo ou o limite vai ser a temperatura +5 (coisaAssim)
 const temperatura = ref(props.data.temperatura);
-const temperaturasDias = ref<{ max: number; min: number }[]>([]);
+const temperaturasDias = ref<{ max: number; min: number; dia: number; semana: string }[]>([]);
+const diasDaSemana = ["Dom.", "Seg.", "Ter.", "Qua.", "Qui.", "Sex.", "Sáb."];
 
 const gerarTemperaturasDias = () => {
     const quantidadeDias = 7;
-    const temperaturas: { max: number; min: number }[] = [];
+    const temperaturas: { max: number; min: number; dia: number; semana: string }[] = [];
 
-    for (let i = 0; i < quantidadeDias; i++) {
-        const variacao = temperatura.value * 0.05;
-        const maxTemperatura = Math.floor(Math.random() * (variacao * 2)) + (temperatura.value + 1);
-        const minTemperatura = Math.floor(maxTemperatura - (temperatura.value * 0.34));
-        temperaturas.push({ max: maxTemperatura, min: minTemperatura });
+    if (props.data.resultadoDiaAtual !== undefined && props.data.resultadoSemanaAtual !== undefined && temperatura.value != undefined) {
+
+        for (let i = 0; i < quantidadeDias; i++) {
+            const calculandoDiasMes = (props.data.resultadoDiaAtual + 1) + i;
+            const calculandoDiasSemana = ((props.data.resultadoSemanaAtual + i) + 1) % 7
+
+            const maxTemperatura = Math.floor(temperatura.value + (Math.random() * 5));
+            const minTemperatura = Math.floor(maxTemperatura - (Math.random() * 12));
+
+            temperaturas.push({ max: maxTemperatura, min: minTemperatura, dia: calculandoDiasMes, semana: diasDaSemana[calculandoDiasSemana] });
+            console.log(calculandoDiasMes, calculandoDiasSemana)
+        }
+        return temperaturas
     }
-    return temperaturas;
+
 }
 
 console.log(props.data.horas)
@@ -27,6 +35,7 @@ watch(() => props.data.temperatura, (newTemperatura) => {
     temperatura.value = newTemperatura;
     temperaturasDias.value = gerarTemperaturasDias();
 })
+
 console.log(temperaturasDias.value)
 
 type Props = {
@@ -46,7 +55,7 @@ type Props = {
                             <h2>Clima atual</h2>
                         </div>
                         <div class="time-day">
-                            <h2>Horário da previsão: {{ data.horas }}</h2>
+                            <h2>Horário da previsão: {{ diasDaSemana[data.resultadoSemanaAtual] }} {{ data.horas }}</h2>
                         </div>
                     </div>
                     <div class="container-temp-info">
@@ -134,8 +143,8 @@ type Props = {
             >
 
                 <div class="day">
-                    <span>{{ 10 }}</span>
-                    <span>{{ }}</span>
+                    <span>{{ temperatura.dia }}</span>
+                    <span>{{ temperatura.semana }}</span>
                 </div>
                 <div class="container-weather-day">
                     <div class="weather-day">
@@ -156,7 +165,6 @@ type Props = {
                     </div>
                 </div>
             </div>
-
         </div>
     </body>
 </template>

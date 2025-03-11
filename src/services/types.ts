@@ -38,4 +38,6 @@ export interface TiposDados {
         urlMap?: string
         horas?: string
         pais?: string
+        resultadoSemanaAtual?: number
+        resultadoDiaAtual?: number
 }

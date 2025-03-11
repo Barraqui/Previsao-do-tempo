@@ -13,7 +13,7 @@ import type { TiposDados } from './services/types';
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
 
-const data: Reactive<TiposDados> = reactive({
+const data = reactive<TiposDados>({
   cidade: "Cidade",
   temperatura: 0,
   descricao: "Descrição",
@@ -26,7 +26,9 @@ const data: Reactive<TiposDados> = reactive({
   pressao: 0,
   urlMap: "",
   horas: "00:00",
-  pais: "País"
+  pais: "País",
+  resultadoDiaAtual: 0,
+  resultadoSemanaAtual: 0
 });
 
 const showWeatherData = async (city: string) => {
@@ -39,9 +41,10 @@ const showWeatherData = async (city: string) => {
   const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
   console.log(resultadoDataHoras)
 
-  const diaSemanaAtual = resultadoDataHoras.getDay();
-  const diaMesAtual = resultadoDataHoras.getDate();
-  console.log(diaSemanaAtual, diaMesAtual)
+  data.resultadoSemanaAtual = resultadoDataHoras.getDay();
+  data.resultadoDiaAtual = resultadoDataHoras.getDate();
+
+  console.log("O dia do mes é" + data.resultadoDiaAtual, "O dia da semana é " + data.resultadoSemanaAtual)
 
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);
