@@ -40,4 +40,5 @@ export interface TiposDados {
         pais?: string
         resultadoSemanaAtual?: number
         resultadoDiaAtual?: number
+        iconCards?: string
 }

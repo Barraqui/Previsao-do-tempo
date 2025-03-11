@@ -132,7 +132,7 @@ body {
 
 .card-temp-day {
     background-color: var(--containerBackground);
-    width: 120px;
+    width: 150px;
     height: 150px;
     border-radius: 5px;
     box-shadow: var(--boxShadow);

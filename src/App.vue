@@ -28,7 +28,8 @@ const data = reactive<TiposDados>({
   horas: "00:00",
   pais: "País",
   resultadoDiaAtual: 0,
-  resultadoSemanaAtual: 0
+  resultadoSemanaAtual: 0,
+  iconCards: []
 });
 
 const showWeatherData = async (city: string) => {
@@ -39,17 +40,13 @@ const showWeatherData = async (city: string) => {
   const calculandoHoras = (infoCidade.dt + infoCidade.timezone + 10800) * 1000;
   const resultadoDataHoras = new Date(calculandoHoras);
   const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
-  console.log(resultadoDataHoras)
 
   data.resultadoSemanaAtual = resultadoDataHoras.getDay();
   data.resultadoDiaAtual = resultadoDataHoras.getDate();
-
-  console.log("O dia do mes é" + data.resultadoDiaAtual, "O dia da semana é " + data.resultadoSemanaAtual)
-
   data.cidade = infoCidade.name;
   data.temperatura = parseInt(infoCidade.main.temp);
   data.descricao = infoCidade.weather[0].description;
-  data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`;
+  data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`; //`http://openweathermap.org/img/wn/50n.png`;
   data.senTermica = parseInt(infoCidade.main.feels_like);
   data.temperaturaMax = parseInt(infoCidade.main.temp_max);
   data.temperaturaMin = parseInt(infoCidade.main.temp_min);
@@ -59,7 +56,23 @@ const showWeatherData = async (city: string) => {
   data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`;
   data.pais = infoCidade.sys.country;
   data.horas = horasString;
+  data.iconCards = [];
 
+  const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d"];
+  const iconNoite = ["01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n"];
+
+  console.log(resultadoDataHoras.getHours());
+  for (let i = 0; i < 7; i++) {
+    const randomIconeDia = iconDia[Math.floor(Math.random() * iconDia.length)];
+    const randomIconeNoite = iconNoite[Math.floor(Math.random() * iconNoite.length)];
+
+    data.iconCards.push({
+      day: `http://openweathermap.org/img/wn/${randomIconeDia}.png`,
+      night: `http://openweathermap.org/img/wn/${randomIconeNoite}.png`
+    })
+  };
+
+  // {id: 701, main: 'Mist', description: 'névoa', icon: '50n'}
 };
 
 
@@ -185,6 +198,7 @@ header {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 5px 10px;
+  margin: 10px;
   color: var(--cor);
   height: 25px;
 }

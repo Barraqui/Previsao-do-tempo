@@ -23,14 +23,12 @@ const gerarTemperaturasDias = () => {
             const minTemperatura = Math.floor(maxTemperatura - (Math.random() * 12));
 
             temperaturas.push({ max: maxTemperatura, min: minTemperatura, dia: calculandoDiasMes, semana: diasDaSemana[calculandoDiasSemana] });
-            console.log(calculandoDiasMes, calculandoDiasSemana)
         }
         return temperaturas
     }
 
 }
 
-console.log(props.data.horas)
 watch(() => props.data.temperatura, (newTemperatura) => {
     temperatura.value = newTemperatura;
     temperaturasDias.value = gerarTemperaturasDias();
@@ -55,7 +53,8 @@ type Props = {
                             <h2>Clima atual</h2>
                         </div>
                         <div class="time-day">
-                            <h2>Horário da previsão: {{ diasDaSemana[data.resultadoSemanaAtual] }} {{ data.horas }}</h2>
+                            <h2>Horário da previsão: {{ diasDaSemana[data.resultadoSemanaAtual ?? 0] }} {{ data.horas }}
+                            </h2>
                         </div>
                     </div>
                     <div class="container-temp-info">
@@ -149,16 +148,16 @@ type Props = {
                 <div class="container-weather-day">
                     <div class="weather-day">
                         <img
-                            v-if="data.icone"
-                            :src="data.icone"
+                            v-if="data.iconCards"
+                            :src="data.iconCards"
                             :alt="data.descricao"
                         />
                         <span>{{ temperatura.max }}&deg;</span>
                     </div>
                     <div class="weather-day">
                         <img
-                            v-if="data.icone"
-                            :src="data.icone"
+                            v-if="data.iconCards"
+                            :src="data.iconCards"
                             :alt="data.descricao"
                         />
                         <span>{{ temperatura.min }}&deg;</span>
