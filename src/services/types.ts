@@ -42,4 +42,5 @@ export interface TiposDados {
         resultadoDiaAtual?: number
         iconCardsDia?: string[]
         iconCardsNoite?: string[]
+        unidadeMedida: string
 }

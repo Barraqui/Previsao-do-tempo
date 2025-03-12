@@ -4,13 +4,14 @@
  Arrumar alguns styles, como fonte, a distancia das divs, cores da pagina
 */
 import { RouterLink, RouterView } from 'vue-router';
-import { reactive, ref, type Reactive } from 'vue';
+import { reactive, ref, watch, type Reactive } from 'vue';
 import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
 import type { TiposDados } from './services/types';
 
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
+const temperaturaSelect = ref("celsius");
 
 const data = reactive<TiposDados>({
   cidade: "Cidade",
@@ -29,7 +30,8 @@ const data = reactive<TiposDados>({
   resultadoDiaAtual: 0,
   resultadoSemanaAtual: 0,
   iconCardsDia: [],
-  iconCardsNoite: []
+  iconCardsNoite: [],
+  unidadeMedida: "C"
 });
 
 const showWeatherData = async (city: string) => {
@@ -41,10 +43,26 @@ const showWeatherData = async (city: string) => {
   const resultadoDataHoras = new Date(calculandoHoras);
   const horasString = resultadoDataHoras.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
+  watch(temperaturaSelect, (newValue) => {
+    if (newValue === "celsius") {
+      data.temperatura = parseInt(infoCidade.main.temp);
+      data.temperaturaMax = parseInt(infoCidade.main.temp_max);
+      data.temperaturaMin = parseInt(infoCidade.main.temp_min);
+      data.senTermica = parseInt(infoCidade.main.feels_like);
+      data.unidadeMedida = "C"
+    } else {
+      data.unidadeMedida = "F"
+      data.temperatura = parseInt((infoCidade.main.temp * 1.8) + 32);
+      data.temperaturaMax = parseInt(infoCidade.main.temp_max * 1.8) + 32;
+      data.temperaturaMin = parseInt(infoCidade.main.temp_min * 1.8) + 32;
+      data.senTermica = parseInt(infoCidade.main.feels_like * 1.8) + 32
+    }
+  })
+
   data.resultadoSemanaAtual = resultadoDataHoras.getDay();
   data.resultadoDiaAtual = resultadoDataHoras.getDate();
   data.cidade = infoCidade.name;
-  data.temperatura = parseInt(infoCidade.main.temp); // C * 1.8 + 32
+  data.temperatura = parseInt(infoCidade.main.temp);
   data.descricao = infoCidade.weather[0].description;
   data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`;
   data.senTermica = parseInt(infoCidade.main.feels_like);
@@ -56,25 +74,23 @@ const showWeatherData = async (city: string) => {
   data.urlMap = `https://www.google.com/maps/embed/v1/place?key=${apiKeyMaps}&q=${infoCidade.name}+${infoCidade.sys.country}`;
   data.pais = infoCidade.sys.country;
   data.horas = horasString;
-  data.iconCardsNoite = [];
 
-  const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "50d"]; // 13d
+  const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "50d"];
   const iconNoite = ["01n", "02n", "03n", "04n", "09n", "10n", "11n", "50n"];
+
   if (data.temperatura <= 0) {
     iconDia.push("13d");
     iconNoite.push("13n")
 
   };
-  console.log(iconDia)
+
   for (let i = 0; i < 7; i++) {
     const randomIconeDia = iconDia[Math.floor(Math.random() * iconDia.length)];
     const randomIconeNoite = iconNoite[Math.floor(Math.random() * iconNoite.length)];
-
     data.iconCardsDia?.push(`http://openweathermap.org/img/wn/${randomIconeDia}.png`);
-    data.iconCardsNoite.push(`http://openweathermap.org/img/wn/${randomIconeNoite}.png`);
+    data.iconCardsNoite?.push(`http://openweathermap.org/img/wn/${randomIconeNoite}.png`);
   };
 };
-
 
 function searcBtn() {
   const cityName = input.value.trim();
@@ -101,22 +117,26 @@ function searcBtn() {
         <div class="city">
           <i class="fa-solid fa-house"></i>
           <h4>{{ data.cidade ?? "Cidade" }}</h4>
-          <i class="fa-solid fa-sun"></i>
-          <h3>{{ data.temperatura + "&deg;C" }}</h3>
+          <img
+            class="iconeCard"
+            v-if="data.icone"
+            :src="data.icone"
+            :alt="data.descricao"
+          />
+          <h3>{{ data.temperatura + "&deg;" }}{{ data.unidadeMedida }}</h3>
         </div>
       </div>
     </div>
     <div class="temp-container">
       <div class="select-temp">
-        <!-- <h3>°C</h3> -->
         <select
           name="Temperatura"
           id="temperaturaSelect"
+          v-model="temperaturaSelect"
         >
           <option value="celsius">°C</option>
           <option value="fahrenheit">°F</option>
         </select>
-        <!-- <i class="fa-solid fa-chevron-down"></i> -->
       </div>
     </div>
   </header>
@@ -199,6 +219,10 @@ header {
   padding-right: 5px;
 }
 
+.city img {
+  width: 30px;
+}
+
 .temp-container {
   display: flex;
   align-items: center;
@@ -221,7 +245,6 @@ select {
   font-size: 18px;
   background-color: #1c1c44;
   border: none;
-  outline: none;
   cursor: pointer;
 }
 </style>
