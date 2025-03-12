@@ -44,7 +44,7 @@ const showWeatherData = async (city: string) => {
   data.resultadoSemanaAtual = resultadoDataHoras.getDay();
   data.resultadoDiaAtual = resultadoDataHoras.getDate();
   data.cidade = infoCidade.name;
-  data.temperatura = parseInt(infoCidade.main.temp);
+  data.temperatura = parseInt(infoCidade.main.temp); // C * 1.8 + 32
   data.descricao = infoCidade.weather[0].description;
   data.icone = `http://openweathermap.org/img/wn/${infoCidade.weather[0].icon}.png`;
   data.senTermica = parseInt(infoCidade.main.feels_like);
@@ -58,9 +58,14 @@ const showWeatherData = async (city: string) => {
   data.horas = horasString;
   data.iconCardsNoite = [];
 
-  const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "13d", "50d"];
-  const iconNoite = ["01n", "02n", "03n", "04n", "09n", "10n", "11n", "13n", "50n"];
+  const iconDia = ["01d", "02d", "03d", "04d", "09d", "10d", "11d", "50d"]; // 13d
+  const iconNoite = ["01n", "02n", "03n", "04n", "09n", "10n", "11n", "50n"];
+  if (data.temperatura <= 0) {
+    iconDia.push("13d");
+    iconNoite.push("13n")
 
+  };
+  console.log(iconDia)
   for (let i = 0; i < 7; i++) {
     const randomIconeDia = iconDia[Math.floor(Math.random() * iconDia.length)];
     const randomIconeNoite = iconNoite[Math.floor(Math.random() * iconNoite.length)];
@@ -103,8 +108,15 @@ function searcBtn() {
     </div>
     <div class="temp-container">
       <div class="select-temp">
-        <h3>°C</h3>
-        <i class="fa-solid fa-chevron-down"></i>
+        <!-- <h3>°C</h3> -->
+        <select
+          name="Temperatura"
+          id="temperaturaSelect"
+        >
+          <option value="celsius">°C</option>
+          <option value="fahrenheit">°F</option>
+        </select>
+        <!-- <i class="fa-solid fa-chevron-down"></i> -->
       </div>
     </div>
   </header>
@@ -202,5 +214,14 @@ header {
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+select {
+  color: var(--cor);
+  font-size: 18px;
+  background-color: #1c1c44;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 </style>
