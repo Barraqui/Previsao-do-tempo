@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from "vue";
-import { getWeatherData } from "@/services/api";
-import type { TiposDados, WeatherResponse } from "@/services/types";
+import { ref, watch } from "vue";
+import type { TiposDados } from "@/services/types";
 
 const props = defineProps<Props>();
 
@@ -26,13 +25,13 @@ const gerarTemperaturasDias = () => {
         }
         return temperaturas
     }
-
-}
+    return [];
+};
 
 watch(() => props.data.temperatura, (newTemperatura) => {
     temperatura.value = newTemperatura;
     temperaturasDias.value = gerarTemperaturasDias();
-})
+});
 
 console.log(temperaturasDias.value)
 
@@ -67,7 +66,7 @@ type Props = {
                                 />
                             </div>
                             <div class="temp-number">
-                                <span>{{ data.temperatura }}</span>
+                                <span>{{ data.temperatura?.toFixed() }}</span>
                             </div>
                             <div class="unit-measurement">
                                 <span>&deg;{{ data.unidadeMedida }}</span>
@@ -78,7 +77,7 @@ type Props = {
                             <div class="thermal-sensation">
                                 <p>sensação térmica</p>
                                 <div class="sensation-temp-number">
-                                    <span id="thermal">{{ data.senTermica }}&deg;</span>
+                                    <span id="thermal">{{ data.senTermica?.toFixed() }}&deg;</span>
                                 </div>
                             </div>
                         </div>
@@ -90,14 +89,16 @@ type Props = {
                             <i class="fa-solid fa-temperature-arrow-up"></i>
                             <div class="title-info">
                                 <span>Temperatura max</span>
-                                <div class="temp-valor">{{ data.temperaturaMax }} &deg;{{ data.unidadeMedida }}</div>
+                                <div class="temp-valor">{{ data.temperaturaMax?.toFixed() }} &deg;{{ data.unidadeMedida
+                                    }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
                             <i class="fa-solid fa-temperature-arrow-down"></i>
                             <div class="title-info">
                                 <span>Temperatura min</span>
-                                <div class="temp-valor">{{ data.temperaturaMin }} &deg;{{ data.unidadeMedida }}</div>
+                                <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
+                                }}</div>
                             </div>
                         </div>
                         <div class="legen-info">

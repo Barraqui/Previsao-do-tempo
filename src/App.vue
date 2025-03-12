@@ -4,7 +4,7 @@
  Arrumar alguns styles, como fonte, a distancia das divs, cores da pagina
 */
 import { RouterLink, RouterView } from 'vue-router';
-import { reactive, ref, watch, type Reactive } from 'vue';
+import { reactive, ref, watch } from 'vue';
 import { getWeatherData } from './services/api';
 import Card from '@/modules/layout/card/index.vue';
 import type { TiposDados } from './services/types';
@@ -52,10 +52,10 @@ const showWeatherData = async (city: string) => {
       data.unidadeMedida = "C"
     } else {
       data.unidadeMedida = "F"
-      data.temperatura = parseInt((infoCidade.main.temp * 1.8) + 32);
-      data.temperaturaMax = parseInt(infoCidade.main.temp_max * 1.8) + 32;
-      data.temperaturaMin = parseInt(infoCidade.main.temp_min * 1.8) + 32;
-      data.senTermica = parseInt(infoCidade.main.feels_like * 1.8) + 32
+      data.temperatura = parseFloat(infoCidade.main.temp) * 1.8 + 32;
+      data.temperaturaMax = parseFloat(infoCidade.main.temp_max) * 1.8 + 32;
+      data.temperaturaMin = parseFloat(infoCidade.main.temp_min) * 1.8 + 32;
+      data.senTermica = parseFloat(infoCidade.main.feels_like) * 1.8 + 32
     }
   })
 
@@ -123,7 +123,7 @@ function searcBtn() {
             :src="data.icone"
             :alt="data.descricao"
           />
-          <h3>{{ data.temperatura + "&deg;" }}{{ data.unidadeMedida }}</h3>
+          <h3>{{ data.temperatura?.toFixed() + "&deg;" }}{{ data.unidadeMedida }}</h3>
         </div>
       </div>
     </div>
