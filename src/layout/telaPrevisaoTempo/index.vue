@@ -1,13 +1,13 @@
 <script setup lang="ts">
-/*
- Criar uma pagina inicial para colocar a cidade que deseja e logo depois ela puxa os dados
- Arrumar alguns styles, como fonte, a distancia das divs, cores da pagina
-*/
-import { RouterLink, RouterView } from 'vue-router';
+
+import { RouterView, useRoute } from 'vue-router';
 import { reactive, ref, watch } from 'vue';
 import { getWeatherData } from '../../services/api';
 import Card from '@/layout/card/index.vue';
 import type { TiposDados } from '../../services/types';
+
+const route = useRoute();
+console.log(route.params)
 
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
 const input = ref();
@@ -92,6 +92,8 @@ const showWeatherData = async (city: string) => {
     };
 };
 
+showWeatherData(route.params.cidade);
+
 function searcBtn() {
     const cityName = input.value.trim();
     showWeatherData(cityName);
@@ -150,7 +152,7 @@ function searcBtn() {
     </div>
 </template>
 
-<style>
+<style scoped>
 header {
     display: flex;
     align-items: center;

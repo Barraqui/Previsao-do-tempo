@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TelaInicial from "@/layout/telaInicial/index.vue";
-import PrevisaoTempo from "@/layout/telaPrevisaoTempo/index.vue"
+
 </script>
 
 <template>
@@ -11,7 +11,7 @@ import PrevisaoTempo from "@/layout/telaPrevisaoTempo/index.vue"
     </main>
 </template>
 
-<style>
+<style scoped>
 .mainContainer {
     display: flex;
     width: 100%;

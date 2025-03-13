@@ -98,7 +98,7 @@ type Props = {
                             <div class="title-info">
                                 <span>Temperatura min</span>
                                 <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
-                                    }}</div>
+                                }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
@@ -168,6 +168,6 @@ type Props = {
         </div>
     </body>
 </template>
-<style>
+<style scoped>
 @import "./index.css";
 </style>

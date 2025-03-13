@@ -19,7 +19,7 @@ const router = createRouter({
       component: () => import('@/layout/telaInicial/index.vue'),
     },
     {
-      path: '/previsaoTempo',
+      path: '/previsaoTempo/:cidade',
       name: 'TelaPrevisaoTempo',
       component: () => import('@/layout/telaPrevisaoTempo/index.vue'),
     },
