@@ -89,8 +89,8 @@ type Props = {
                             <i class="fa-solid fa-temperature-arrow-up"></i>
                             <div class="title-info">
                                 <span>Temperatura max</span>
-                                <div class="temp-valor">{{ data.temperaturaMax?.toFixed() }} &deg;{{ data.unidadeMedida
-                                    }}</div>
+                                <div class="temp-valor">{{ data.temperaturaMax?.toFixed() }} &deg;{{
+                                    data.unidadeMedida }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
@@ -98,7 +98,7 @@ type Props = {
                             <div class="title-info">
                                 <span>Temperatura min</span>
                                 <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
-                                }}</div>
+                                    }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
