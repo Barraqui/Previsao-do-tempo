@@ -15,7 +15,7 @@ function searcBntInicial() {
 <template>
 
   <body>
-    <div class="container">
+    <div class="container-card-start">
       <div class="container-card">
         <div class="teste">
           <h1>Previsão do Tempo</h1>

@@ -7,6 +7,7 @@ import Card from '@/layout/card/index.vue';
 import type { TiposDados } from '../../services/types';
 
 const route = useRoute();
+const cidadeParam = Array.isArray(route.params.cidade) ? route.params.cidade[0] : route.params.cidade;
 console.log(route.params)
 
 const apiKeyMaps = import.meta.env.VITE_APIKEYMAPS;
@@ -80,7 +81,7 @@ const showWeatherData = async (city: string) => {
 
     if (data.temperatura <= 0) {
         iconDia.push("13d");
-        iconNoite.push("13n")
+        iconNoite.push("13n");
 
     };
 
@@ -92,7 +93,7 @@ const showWeatherData = async (city: string) => {
     };
 };
 
-showWeatherData(route.params.cidade);
+showWeatherData(cidadeParam);
 
 function searcBtn() {
     const cityName = input.value.trim();
@@ -129,7 +130,6 @@ function searcBtn() {
                 </div>
             </div>
         </div>
-        <!-- <RouterLink to="/telaInicial">TELA</RouterLink> router link -->
         <div class="temp-container">
             <div class="select-temp">
                 <select

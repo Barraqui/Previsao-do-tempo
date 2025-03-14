@@ -43,7 +43,7 @@ type Props = {
 <template>
 
     <body>
-        <div class="container">
+        <div class="container-main-info">
             <div class="container-info">
                 <div class="container-climate">
                     <div class="time-climate">
@@ -98,7 +98,7 @@ type Props = {
                             <div class="title-info">
                                 <span>Temperatura min</span>
                                 <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
-                                }}</div>
+                                    }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
@@ -165,6 +165,9 @@ type Props = {
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="container-graphic-design">
+
         </div>
     </body>
 </template>

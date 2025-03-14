@@ -33,11 +33,13 @@ a,
     padding: 0 2rem;
   }
 } */
-:root { 
+:root {
   --cor: #f1f1f1;
+  --containerBackground: rgba(255, 255, 255, 0.05);
+  --boxShadow: 1px 0px 5px;
 }
 
-*{
+* {
   margin: 0px;
   padding: 0px;
 }
