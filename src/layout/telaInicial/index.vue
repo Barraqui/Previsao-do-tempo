@@ -17,11 +17,14 @@ function searcBntInicial() {
   <body>
     <div class="container-card-start">
       <div class="container-card">
-        <div class="teste">
+        <div class="text-title">
           <h1>Previsão do Tempo</h1>
         </div>
         <div class="text-card">
-          <h2>Confira o clima de uma cidade:</h2>
+          <div class="text-container">
+            <i class="fa-solid fa-location-dot"></i>
+            <h2>Confira o clima de uma cidade:</h2>
+          </div>
           <input
             type="text"
             placeholder="Pesquisar por local"
@@ -39,5 +42,66 @@ function searcBntInicial() {
 </template>
 
 <style scoped>
-@import "./index.css";
+body {
+  background-color: var(--color2);
+  color: var(--cor);
+}
+
+.container-card-start {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container-card {
+  background-color: var(--color3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  height: 250px;
+  padding: 5px;
+  gap: 5px;
+  box-shadow: var(--boxShadow);
+  border-radius: 10px;
+}
+
+.text-title {
+  padding: 15px;
+  font-size: 18px;
+}
+
+.text-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding-bottom: 10px;
+}
+
+.text-card input {
+  margin-top: 10px;
+  width: 100%;
+  height: 30px;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.container-button {
+  height: 40px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: var(--boxShadow);
+}
+
+.text-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.text-container i {
+  font-size: 22px;
+}
 </style>
