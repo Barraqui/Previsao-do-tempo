@@ -1,6 +1,17 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import type { TiposDados } from "@/services/types";
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, } from "chart.js";
+import { Bar } from "vue-chartjs";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 const props = defineProps<Props>();
 
@@ -33,10 +44,35 @@ watch(() => props.data.temperatura, (newTemperatura) => {
     temperaturasDias.value = gerarTemperaturasDias();
 });
 
-console.log(temperaturasDias.value)
-
 type Props = {
     data: TiposDados
+};
+
+const dadosGraficos = computed(() => {
+    return {
+        labels: temperaturasDias.value.map(temperatura => temperatura.semana),
+        datasets: [
+            {
+                label: "Temperatura Máxima",
+                data: temperaturasDias.value.map(temperatura => temperatura.max),
+                backgroundColor: "rgba(255, 99, 132, 0.5)",
+                borderColor: "rgb(255, 99, 132)",
+                borderWidth: 1,
+            },
+            {
+                label: "Temperatura Mínima",
+                data: temperaturasDias.value.map(temperatura => temperatura.min),
+                backgroundColor: "rgba(54, 162, 235, 0.5)",
+                borderColor: "rgb(54, 162, 235)",
+                borderWidth: 1,
+            }
+        ]
+    }
+})
+
+const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
 };
 </script>
 
@@ -98,7 +134,7 @@ type Props = {
                             <div class="title-info">
                                 <span>Temperatura min</span>
                                 <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
-                                    }}</div>
+                                }}</div>
                             </div>
                         </div>
                         <div class="legen-info">
@@ -167,6 +203,10 @@ type Props = {
             </div>
         </div>
         <div class="container-graphic-design">
+            <Bar
+                :data="dadosGraficos"
+                :options="chartOptions"
+            />
 
         </div>
     </body>
