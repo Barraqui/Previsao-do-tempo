@@ -157,7 +157,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #1c1c44;
+    background-color: #121b2e;
 }
 
 .search-city {
@@ -178,9 +178,10 @@ header {
 .input-container {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    border: var(--border);
+    border-radius: var(--border-radius);
     padding: 5px 10px;
+    min-width: 200px;
 }
 
 .input-container input {
@@ -193,9 +194,9 @@ header {
 
 .search button {
     height: 30px;
-    width: 30px;
+    width: 40px;
     cursor: pointer;
-    background-color: #1c1c44;
+    background-color: transparent;
     border: none;
 }
 
@@ -204,18 +205,18 @@ header {
 }
 
 .city-container {
-    margin: 0px;
+    margin: 10px;
 }
 
 .city {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
     padding: 5px 10px;
     cursor: pointer;
-    margin-left: 15px;
+    margin-left: 20px;
     height: 25px;
+    border: var(--border);
+    border-radius: var(--border-radius);
     color: var(--cor);
 }
 
@@ -231,12 +232,13 @@ header {
 .temp-container {
     display: flex;
     align-items: center;
-    border: 1px solid #ccc;
-    border-radius: 8px;
     padding: 5px 10px;
     margin: 10px;
-    color: var(--cor);
+    margin-right: 130px;
     height: 25px;
+    color: var(--cor);
+    border: var(--border);
+    border-radius: var(--border-radius);
 }
 
 .select-temp {
@@ -248,7 +250,7 @@ header {
 select {
     color: var(--cor);
     font-size: 18px;
-    background-color: #1c1c44;
+    background-color: #121b2e;
     border: none;
     cursor: pointer;
 }

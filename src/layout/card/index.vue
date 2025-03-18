@@ -201,16 +201,172 @@ const chartOptions = {
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container-graphic-design">
-            <Bar
-                :data="dadosGraficos"
-                :options="chartOptions"
-            />
+            <div class="container-graphic-design">
+                <Bar
+                    :data="dadosGraficos"
+                    :options="chartOptions"
+                />
 
+            </div>
         </div>
     </body>
 </template>
 <style scoped>
-@import "./index.css";
+body {
+    background-color: var(--color2);
+    color: var(--cor);
+}
+
+.container-main-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.container-info {
+    width: 45%;
+    height: 100%;
+    border: var(--border);
+    border-radius: var(--border-radius);
+}
+
+.container-climate {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    cursor: pointer;
+    background-color: var(--containerBackground);
+}
+
+.time-climate {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.climate {
+    font-size: 15px;
+}
+
+.time-day {
+    font-size: 10px;
+}
+
+.container-temp-info {
+    display: flex;
+    align-items: center;
+}
+
+.info-temp {
+    display: flex;
+    align-items: center;
+}
+
+.img-temp {
+    margin-right: 10px;
+}
+
+.temp-number {
+    font-size: 35px;
+}
+
+.unit-measurement {
+    font-size: 25px;
+}
+
+.info-climate {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 15px;
+    margin-left: 30px;
+}
+
+.thermal-sensation {
+    display: flex;
+    align-items: center;
+}
+
+.sensation-temp-number {
+    margin-left: 15px;
+}
+
+.more-infos {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.legen-info {
+    display: flex;
+    align-items: center;
+}
+
+.legen-info i {
+    margin-right: 15px;
+    height: 20px;
+}
+
+.container-map {
+    width: 50%;
+}
+
+.container-map iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: var(--border);
+}
+
+.container-day {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 50px;
+    margin-left: 80px;
+    margin-right: 80px;
+    gap: 50px;
+}
+
+.card-temp-day {
+    width: 150px;
+    height: 150px;
+    background-color: var(--containerBackground);
+    border-radius: var(--border-radius);
+    border: var(--border);
+}
+
+.day {
+    display: flex;
+    justify-content: space-between;
+}
+
+.day span {
+    margin: 5px;
+    font-size: 18px;
+}
+
+.container-weather-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 15px;
+}
+
+.weather-day {
+    font-size: 24px;
+}
+
+.container-graphic-design {
+    width: 100%;
+    height: 300px;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    background-color: var(--containerBackground);
+}
 </style>

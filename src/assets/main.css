@@ -2,14 +2,18 @@
   --cor: #f1f1f1;
   --containerBackground: rgba(255, 255, 255, 0.05);
   --boxShadow: 1px 0px 5px;
+  --border-radius: 10px;
   --color1: #060606;
   --color2: #16243d;
   --color3: #415a8c;
   --color4: #7398d6;
   --color5: #9eccdf;
+  --border: 1px solid #f1f1f1;
+  --font-family: 'Open Sans', sans-serif;
 }
 
 * {
   margin: 0px;
   padding: 0px;
+  font-family: var(--font-family);
 }
