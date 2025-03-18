@@ -27,7 +27,7 @@ function searcBntInicial() {
           </div>
           <input
             type="text"
-            placeholder="Pesquisar por local"
+            placeholder="Informar o nome da cidade"
             v-model="input"
           >
         </div>
@@ -59,12 +59,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
+  width: 420px;
   height: 250px;
   padding: 5px;
   gap: 5px;
-  box-shadow: var(--boxShadow);
-  border-radius: 10px;
+  border: var(--border);
+  border-radius: var(--border-radius);
 }
 
 .text-title {
@@ -84,15 +84,16 @@ body {
   margin-top: 10px;
   width: 100%;
   height: 30px;
-  border-radius: 10px;
-  padding: 3px;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 5px;
 }
 
 .container-button {
   height: 40px;
-  width: 90%;
-  border-radius: 10px;
-  box-shadow: var(--boxShadow);
+  width: 80%;
+  border-radius: var(--border-radius);
+  border: var(--border);
 }
 
 .text-container {
