@@ -177,27 +177,28 @@ const chartOptions = {
                 :key="index"
                 class="card-temp-day"
             >
-
-                <div class="day">
-                    <span>{{ temperatura.dia }}</span>
-                    <span>{{ temperatura.semana }}</span>
-                </div>
-                <div class="container-weather-day">
-                    <div class="weather-day">
-                        <img
-                            v-if="data.iconCardsDia && data.iconCardsDia[index]"
-                            :src="data.iconCardsDia[index]"
-                            :alt="'Noite ' + temperatura.semana"
-                        />
-                        <span>{{ temperatura.max }}&deg;</span>
+                <div class="card-day-weather">
+                    <div class="day">
+                        <span>{{ temperatura.dia }}</span>
+                        <span>{{ temperatura.semana }}</span>
                     </div>
-                    <div class="weather-day">
-                        <img
-                            v-if="data.iconCardsNoite && data.iconCardsNoite[index]"
-                            :src="data.iconCardsNoite[index]"
-                            :alt="data.descricao"
-                        />
-                        <span>{{ temperatura.min }}&deg;</span>
+                    <div class="container-weather-day">
+                        <div class="weather-day">
+                            <img
+                                v-if="data.iconCardsDia && data.iconCardsDia[index]"
+                                :src="data.iconCardsDia[index]"
+                                :alt="'Noite ' + temperatura.semana"
+                            />
+                            <span>{{ temperatura.max }}&deg;</span>
+                        </div>
+                        <div class="weather-day">
+                            <img
+                                v-if="data.iconCardsNoite && data.iconCardsNoite[index]"
+                                :src="data.iconCardsNoite[index]"
+                                :alt="data.descricao"
+                            />
+                            <span>{{ temperatura.min }}&deg;</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -211,6 +212,7 @@ const chartOptions = {
         </div>
     </body>
 </template>
+
 <style scoped>
 body {
     background-color: var(--color2);
@@ -230,6 +232,7 @@ body {
     height: 100%;
     border: var(--border);
     border-radius: var(--border-radius);
+    background-color: var(--backgroundContainer);
 }
 
 .container-climate {
@@ -245,7 +248,7 @@ body {
     justify-content: flex-start;
     align-items: flex-start;
     flex-direction: column;
-    padding: 10px;
+    padding: 20px;
 }
 
 .climate {
@@ -259,6 +262,7 @@ body {
 .container-temp-info {
     display: flex;
     align-items: center;
+    padding-left: 20px;
 }
 
 .info-temp {
@@ -298,12 +302,13 @@ body {
 .more-infos {
     display: flex;
     justify-content: space-between;
-    margin: 10px;
+    padding: 20px;
 }
 
 .legen-info {
     display: flex;
     align-items: center;
+    font-size: 14px;
 }
 
 .legen-info i {
@@ -335,9 +340,13 @@ body {
 .card-temp-day {
     width: 150px;
     height: 150px;
-    background-color: var(--containerBackground);
     border-radius: var(--border-radius);
     border: var(--border);
+    background-color: var(--backgroundContainer);
+}
+
+.card-day-weather {
+    background-color: var(--containerBackground);
 }
 
 .day {
@@ -362,11 +371,15 @@ body {
     font-size: 24px;
 }
 
+canvas {
+    background-color: var(--containerBackground);
+}
+
 .container-graphic-design {
     width: 100%;
     height: 300px;
     border-radius: var(--border-radius);
     border: var(--border);
-    background-color: var(--containerBackground);
+    background-color: var(--backgroundContainer);
 }
 </style>
