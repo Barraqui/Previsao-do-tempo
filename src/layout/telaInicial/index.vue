@@ -16,25 +16,29 @@ function searcBntInicial() {
 
   <body>
     <div class="container-card-start">
-      <div class="container-card">
-        <div class="text-title">
-          <h1>Previsão do Tempo</h1>
-        </div>
-        <div class="text-card">
-          <div class="text-container">
-            <i class="fa-solid fa-location-dot"></i>
-            <h2>Confira o clima de uma cidade:</h2>
+      <div class="container-card-color">
+
+
+        <div class="container-card">
+          <div class="text-title">
+            <h1>Previsão do Tempo</h1>
           </div>
-          <input
-            type="text"
-            placeholder="Informar o nome da cidade"
-            v-model="input"
-          >
+          <div class="text-card">
+            <div class="text-container">
+              <i class="fa-solid fa-location-dot"></i>
+              <h2>Confira o clima de uma cidade:</h2>
+            </div>
+            <input
+              type="text"
+              placeholder="Informar o nome da cidade"
+              v-model="input"
+            >
+          </div>
+          <button
+            class="container-button"
+            @click="searcBntInicial"
+          >BUSCAR</button>
         </div>
-        <button
-          class="container-button"
-          @click="searcBntInicial"
-        >BUSCAR</button>
       </div>
     </div>
   </body>
@@ -54,16 +58,20 @@ body {
   height: 100vh;
 }
 
-.container-card {
+.container-card-color {
   background-color: var(--color3);
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+
+.container-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 420px;
   height: 250px;
-  padding: 5px;
   gap: 5px;
-  border: var(--border);
+  background-color: var(--containerBackground);
   border-radius: var(--border-radius);
 }
 

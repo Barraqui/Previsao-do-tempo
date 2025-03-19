@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import { computed, ref, watch } from "vue";
 import type { TiposDados } from "@/services/types";
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, } from "chart.js";
@@ -81,81 +82,86 @@ const chartOptions = {
     <body>
         <div class="container-main-info">
             <div class="container-info">
-                <div class="container-climate">
-                    <div class="time-climate">
-                        <div class="climate">
-                            <h1>{{ data.cidade }}, {{ data.pais }}</h1>
-                            <h2>Clima atual</h2>
-                        </div>
-                        <div class="time-day">
-                            <h2>Horário da previsão: {{ diasDaSemana[data.resultadoSemanaAtual ?? 0] }} {{ data.horas }}
-                            </h2>
-                        </div>
-                    </div>
-                    <div class="container-temp-info">
-                        <div class="info-temp">
-                            <div class="img-temp">
-                                <img
-                                    v-if="data.icone"
-                                    :src="data.icone"
-                                    :alt="data.descricao"
-                                />
+                <div class="container-climate-white">
+
+                    <div class="container-climate">
+                        <div class="time-climate">
+                            <div class="climate">
+                                <h1>{{ data.cidade }}, {{ data.pais }}</h1>
+                                <h2>Clima atual</h2>
                             </div>
-                            <div class="temp-number">
-                                <span>{{ data.temperatura?.toFixed() }}</span>
-                            </div>
-                            <div class="unit-measurement">
-                                <span>&deg;{{ data.unidadeMedida }}</span>
+                            <div class="time-day">
+                                <h2>Horário da previsão: {{ diasDaSemana[data.resultadoSemanaAtual ?? 0] }} {{
+                                    data.horas }}
+                                </h2>
                             </div>
                         </div>
-                        <div class="info-climate">
-                            <p>{{ data.descricao }}</p>
-                            <div class="thermal-sensation">
-                                <p>sensação térmica</p>
-                                <div class="sensation-temp-number">
-                                    <span id="thermal">{{ data.senTermica?.toFixed() }}&deg;</span>
+                        <div class="container-temp-info">
+                            <div class="info-temp">
+                                <div class="img-temp">
+                                    <img
+                                        v-if="data.icone"
+                                        :src="data.icone"
+                                        :alt="data.descricao"
+                                    />
+                                </div>
+                                <div class="temp-number">
+                                    <span>{{ data.temperatura?.toFixed() }}</span>
+                                </div>
+                                <div class="unit-measurement">
+                                    <span>&deg;{{ data.unidadeMedida }}</span>
+                                </div>
+                            </div>
+                            <div class="info-climate">
+                                <p>{{ data.descricao }}</p>
+                                <div class="thermal-sensation">
+                                    <p>sensação térmica</p>
+                                    <div class="sensation-temp-number">
+                                        <span id="thermal">{{ data.senTermica?.toFixed() }}&deg;</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="container-climate">
-                    <div class="more-infos">
-                        <div class="legen-info">
-                            <i class="fa-solid fa-temperature-arrow-up"></i>
-                            <div class="title-info">
-                                <span>Temperatura max</span>
-                                <div class="temp-valor">{{ data.temperaturaMax?.toFixed() }} &deg;{{
-                                    data.unidadeMedida }}</div>
+                    <div class="container-climate">
+                        <div class="more-infos">
+                            <div class="legen-info">
+                                <i class="fa-solid fa-temperature-arrow-up"></i>
+                                <div class="title-info">
+                                    <span>Temperatura max</span>
+                                    <div class="temp-valor">{{ data.temperaturaMax?.toFixed() }} &deg;{{
+                                        data.unidadeMedida }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legen-info">
-                            <i class="fa-solid fa-temperature-arrow-down"></i>
-                            <div class="title-info">
-                                <span>Temperatura min</span>
-                                <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{ data.unidadeMedida
-                                }}</div>
+                            <div class="legen-info">
+                                <i class="fa-solid fa-temperature-arrow-down"></i>
+                                <div class="title-info">
+                                    <span>Temperatura min</span>
+                                    <div class="temp-valor">{{ data.temperaturaMin?.toFixed() }} &deg;{{
+                                        data.unidadeMedida
+                                        }}</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legen-info">
-                            <i class="fa-solid fa-wind"></i>
-                            <div class="title-info">
-                                <span>Vento</span>
-                                <div class="temp-valor">{{ data.vento }} Km/h</div>
+                            <div class="legen-info">
+                                <i class="fa-solid fa-wind"></i>
+                                <div class="title-info">
+                                    <span>Vento</span>
+                                    <div class="temp-valor">{{ data.vento }} Km/h</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legen-info">
-                            <i class="fa-solid fa-droplet"></i>
-                            <div class="title-info">
-                                <span>Umidade</span>
-                                <div class="temp-valor">{{ data.umidade }} %</div>
+                            <div class="legen-info">
+                                <i class="fa-solid fa-droplet"></i>
+                                <div class="title-info">
+                                    <span>Umidade</span>
+                                    <div class="temp-valor">{{ data.umidade }} %</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="legen-info">
-                            <i class="fa-solid fa-cloud-arrow-down"></i>
-                            <div class="title-info">
-                                <span>Pressão</span>
-                                <div class="temp-valor">{{ data.pressao }} mb</div>
+                            <div class="legen-info">
+                                <i class="fa-solid fa-cloud-arrow-down"></i>
+                                <div class="title-info">
+                                    <span>Pressão</span>
+                                    <div class="temp-valor">{{ data.pressao }} mb</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -235,12 +241,16 @@ body {
     background-color: var(--backgroundContainer);
 }
 
+.container-climate-white {
+    background-color: var(--containerBackground);
+    border-radius: var(--border-radius);
+}
+
 .container-climate {
     display: flex;
     flex-direction: column;
     width: 100%;
     cursor: pointer;
-    background-color: var(--containerBackground);
 }
 
 .time-climate {
@@ -346,6 +356,8 @@ body {
 }
 
 .card-day-weather {
+    height: 100%;
+    border-radius: 12px;
     background-color: var(--containerBackground);
 }
 
@@ -356,6 +368,8 @@ body {
 
 .day span {
     margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
     font-size: 18px;
 }
 
@@ -373,6 +387,7 @@ body {
 
 canvas {
     background-color: var(--containerBackground);
+    border-radius: 8px;
 }
 
 .container-graphic-design {
